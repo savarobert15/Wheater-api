@@ -1,9 +1,22 @@
 console.log('Salut')
+let input = document.querySelector('input')
+let lupa = document.querySelector('#lupa')
 const API_KEY='4774e3f272c6f85fa2a1126fe6665069'
-const city='Galati'
 let c_soare=document.querySelector('#c_soare')
-async function getWheater(){
+let eroare = document.createElement('div')
+        let eroare_p = document.createElement('p')
+        eroare.appendChild(eroare_p)
+        eroare.className = 'eroare'
+        eroare_p.className = 'eroare_p'
+async function getWheater(city){
     const response=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=ro`)
+    if(!response.ok ){
+        c_soare.innerHTML=''
+        eroare_p.textContent=`Orasul ${input.value} nu a fost gasit`
+        c_soare.appendChild(eroare)
+        input.value=''
+    }
+    else{
     const data=await response.json()
     console.log(data)
     c_soare.innerHTML=`
@@ -27,5 +40,16 @@ async function getWheater(){
                     </div>
                 </div>
     `
+    input.value=''
+    }
 }
-getWheater()
+lupa.addEventListener('click',()=>{
+    let city = input.value
+    getWheater(city)
+})
+document.addEventListener('keydown',(e)=>{
+    if(e.key === 'Enter'){
+        let city = input.value
+        getWheater(city)
+    }
+})
