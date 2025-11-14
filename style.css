@@ -45,7 +45,7 @@ input::placeholder{
     transition:.3s;
 }
 #lupa:hover{
-    font-size: 3rem;
+    scale:1.2;
 }
 #c_soare{
     width:75vh;
@@ -81,4 +81,13 @@ input::placeholder{
 .atribute{
     font-size: 1rem;
     color:hsl(0, 0%, 60%);
+}
+.eroare_p{
+    color:white;
+    font-size:1.5rem;
+}
+.eroare{
+    background-color: hsl(219, 79%, 66%);
+    padding:20px 50px;
+    border-radius:50px;
 }
